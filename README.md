@@ -170,6 +170,8 @@ Inside each contract, library or interface, use the following order:
 
 #
 
-I will teach you everything that I am learning and I will keep updating this repo if I find something new. You can also make PR if you wanna update something.
+I will teach you everything that I am learning and I will keep updating this repo if I find something new so you can star or fork this repo if you want. 
 
 If you have any doubts or find any mistakes, please feel free to reach out to me and I’d try to reply AFAP. Consider me as a friend and [Contact Me](https://linktr.ee/harendra_shakya).
+
+You can also make PR if you wanna update something.
