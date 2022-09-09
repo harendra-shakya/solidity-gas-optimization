@@ -20,7 +20,7 @@
 
 ## Storage
 
-- Saving one variable in storage costs 20,000 gas
+- Saving one variable in storage costs 20,000 gas (<a href="#some-more-resources">Check gas used by EVM opcodes</a>)
 - 5,000 gas when we rewrite the variable
 - reading from the slot take 200 gas
 - But storage variable declaration doesn't cost anything, as there's no initialization
@@ -139,6 +139,12 @@ When a public function of a library is called, the bytecode of that function is 
 - Remix
 - Truffle
 - Eth Gas reporter
+
+## Some more resources
+
+[Check Gas used by EVM Opcodes](https://github.com/crytic/evm-opcodes)
+
+[Awesome Solidity Gas Optimization](https://github.com/harendra-shakya/awesome-solidity-gas-optimization)
 
 #
 
