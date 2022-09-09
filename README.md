@@ -66,10 +66,11 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 ## Variables
 
 - Avoid public variables
+- Use global variables efficiently
+- it is good to use global variables with private visibility as it saves gas
 - Use events rather than storing data
 - Use memory arrays efficiently
 - it's good to use memory arrays if the size of the array is known, fixed size memory arrays can be used to save gas.
-- Use global variables efficiently
 - Use return values efficiently
 - A simple optimization in Solidity consists of naming the return value of a function. It is not needed to create a local variable then.
 
