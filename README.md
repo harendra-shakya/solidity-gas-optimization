@@ -84,7 +84,8 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 - Each position will have an extra 22 gas, so
   - Reduce public varibles
   - Put often called functions earlier
-- reduce the parameters if possible
+- reduce the parameters if possible (Bigger input data increases gas because more things will be stored in memory)
+- payable function saves some gas as compare to non-payable functions (as the compiler won't have to check)
 
 ### View Functions
 
@@ -119,35 +120,6 @@ When a public function of a library is called, the bytecode of that function is 
 - sha256: 60 gas + 12 gas for each word of input data
 - ripemd160 - 600 gas + 120 gas for each word of input data
 - So if you don't have any specific reasons to select another hash function, just use keccak256
-
-### Layout
-
-Layout contract elements in the following order:
-
-1. Pragma statements
-2. Import statements
-3. Interfaces
-4. Libraries
-5. Errors
-6. Contracts
-
-Inside each contract, library or interface, use the following order:
-
-1. Type declarations
-2. State variables
-3. Events
-4. Modifiers
-5. Functions
-
-- Function order
-  - constructor
-  - receive (if exists)
-  - fallback (if exists)
-  - external
-  - public
-  - internal
-  - private
-  - view / pure
 
 ### Order
 
