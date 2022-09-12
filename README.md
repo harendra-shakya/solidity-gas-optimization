@@ -97,6 +97,7 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 
 - use memory variables in loops
 - try to avoid unbounded loops
+- write uint256 index; instead of write uint256 index = 0; as being a uin256 it will be 0 by default so you can save some gas by avoiding initialization.
 - if you put `++` before `i` it costs less gas
 
 ## Other Optimizations
