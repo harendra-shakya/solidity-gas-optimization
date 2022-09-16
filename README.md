@@ -120,7 +120,7 @@ When a public function of a library is called, the bytecode of that function is 
 
 - keccak256: 30 gas + 6 gas for each word of input data
 - sha256: 60 gas + 12 gas for each word of input data
-- ripemd160 - 600 gas + 120 gas for each word of input data
+- ripemd160: 600 gas + 120 gas for each word of input data
 - So if you don't have any specific reasons to select another hash function, just use keccak256
 
 ### Order
