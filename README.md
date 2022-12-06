@@ -13,10 +13,10 @@
 
 ## Main Gas optimization areas in solidity
 
-- Storage
-- Variables
-- Functions
-- Loops
+- [Storage](#storage)
+- [Variables](#variables)
+- [Functions](#functions)
+- [Loops](#loops)
 
 ## Storage
 
