@@ -150,6 +150,8 @@ When a public function of a library is called, the bytecode of that function is 
 
 [Yul (and Some Solidity) Optimizations and Tricks](https://hackmd.io/@gn56kcRBQc6mOi7LCgbv1g/rJez8O8st)
 
+[Gas Puzzel](https://github.com/RareSkills/gas-puzzles)
+
 #
 
 I will teach you everything that I am learning and I will keep updating this repo if I find something new so you can star or fork this repo if you want. 
