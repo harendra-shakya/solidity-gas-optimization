@@ -1,4 +1,4 @@
-# Gas optimization
+# EVM Gas optimization tricks
 
 ## Optimization process
 
