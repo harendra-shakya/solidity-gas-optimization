@@ -132,9 +132,9 @@ When a public function of a library is called, the bytecode of that function is 
   - f(x) || g(y)
   - f(x) && g(y)
 
-## Markle proof
+## Merkle proof
 
-- A markle tree can be used to prove the validity of a large amount of data using a small amount of data.
+- A merkle tree can be used to prove the validity of a large amount of data using a small amount of data.
 
 ## Tools for estimating gas
 
