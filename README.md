@@ -34,7 +34,7 @@
 
 ### Refunds
 
-- Free storage slot as by zeroing corresponding variables as soon as you don't need them anymore. This will refund 15,000 of gas.
+- Free storage slot by zeroing corresponding variables as soon as you don't need them anymore. This will refund 15,000 of gas.
 - Removing a contract by using Selfdestruct opcodes refunds 24,000 gas. But a refund must not surpass half the gas that the ongoing contract call uses.
 
 ### Data types and packing
@@ -61,7 +61,7 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 
 - the cost of memory is complicated. you "buy" it in chunks, the cost of which will go up quadratically after a while
 
-- Try adjusting the location of your variables by playing with the keywords "storage" and "memory". Depending on the size and number of copying operations between Storage and memory, switching to memory may or may not give improvements. All this is coz of varying memory costs. So optimizing here is not that obvious and every case has to be considerd individually.
+- Try adjusting the location of your variables by playing with the keywords "storage" and "memory". Depending on the size and number of copying operations between Storage and memory, switching to memory may or may not give improvements. All this is coz of varying memory costs. So optimizing here is not that obvious and every case has to be considered individually.
 
 ## Variables
 
@@ -70,23 +70,23 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 - it is good to use global variables with private visibility as it saves gas
 - Use events rather than storing data
 - Use memory arrays efficiently
-- it's good to use memory arrays if the size of the array is known, fixed size memory arrays can be used to save gas.
+- it's good to use memory arrays if the size of the array is known, fixed-size memory arrays can be used to save gas.
 - Use return values efficiently
 - A simple optimization in Solidity consists of naming the return value of a function. It is not needed to create a local variable then.
 
 ### Mapping vs Array
 
-- Use mapping whenever possible, it's cheap instead of array
-- But array could be a good choice if you have small array
+- Use mapping whenever possible, it's cheap instead of the array
+- But an array could be a good choice if you have a small array
 
 ## Functions
 
 - use external most of the time whenever possible
 - Each position will have an extra 22 gas, so
   - Reduce public varibles
-  - Put often called functions earlier
+  - Put often-called functions earlier
 - reduce the parameters if possible (Bigger input data increases gas because more things will be stored in memory)
-- payable function saves some gas as compare to non-payable functions (as the compiler won't have to check)
+- payable function saves some gas as compared to non-payable functions (as the compiler won't have to check)
 
 ### View Functions
 
@@ -97,22 +97,22 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 
 - use memory variables in loops
 - try to avoid unbounded loops
-- write uint256 index; instead of write uint256 index = 0; as being a uin256 it will be 0 by default so you can save some gas by avoiding initialization.
+- write uint256 index; instead of writing uint256 index = 0; as being a uint256, it will be 0 by default so you can save some gas by avoiding initialization.
 - if you put `++` before `i` it costs less gas
 
 ## Other Optimizations
 
 - Remove the dead code
 - Use different solidity versions and try
-- EXTCODESIZE is quite expensive, this is used for calls between contracts, the only option we see to optimize the code in this regard is minimizing the numbers of calls to other contracts and libraries.
+- EXTCODESIZE is quite expensive, this is used for calls between contracts, the only option we see to optimize the code in this regard is minimizing the number of calls to other contracts and libraries.
 
 ### Libraries
 
-When a public function of a library is called, the bytecode of that function is not made part of a client contract. Thus, complex logic should be put in libraries (but there is also cost of calling the library function)
+When a public function of a library is called, the bytecode of that function is not made part of a client contract. Thus, complex logic should be put in libraries (but there is also the cost of calling the library function)
 
 ### Errors
 
-- Use "require" for all runtime conditions validations that can't be prevalidated on the compile time. And "assert" should be used only for static validation that normally fail never fail on a properly functioning code.
+- Use "require" for all runtime conditions validations that can't be prevalidated on the compile time. And "assert" should be used only for static validation that normally fails never fail on a properly functioning code.
 - string size in require statements can be shortened to reduce gas.
 - A failing "assert" consumer all the gas available to the call, while "require" doesn't consume any.
 
@@ -134,7 +134,7 @@ When a public function of a library is called, the bytecode of that function is 
 
 ## Merkle proof
 
-- A merkle tree can be used to prove the validity of a large amount of data using a small amount of data.
+- A Merkle tree can be used to prove the validity of a large amount of data using a small amount of data.
 
 ## Tools for estimating gas
 
@@ -154,7 +154,7 @@ When a public function of a library is called, the bytecode of that function is 
 
 #
 
-I will teach you everything that I am learning and I will keep updating this repo if I find something new so you can star or fork this repo if you want. 
+I will teach you everything that I am learning and I will keep updating this repo if I find something new so you can start or fork this repo if you want. 
 
 If you have any doubts or find any mistakes, please feel free to reach out to me and I’d try to reply AFAP. Consider me as a friend and [Contact Me](https://linktr.ee/harendra_shakya).
 
