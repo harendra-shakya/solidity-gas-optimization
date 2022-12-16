@@ -17,6 +17,7 @@
 - [Variables](#variables)
 - [Functions](#functions)
 - [Loops](#loops)
+- [Operations](#operations)
 
 ## Storage
 
@@ -109,6 +110,25 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 - write uint256 index; instead of writing uint256 index = 0; as being a uint256, it will be 0 by default so you can save some gas by avoiding initialization.
 - if you put `++` before `i` it costs less gas
 
+## Operations
+
+### Order
+
+- Order cheap functions before
+  - f(x) is cheap
+  - g(y) is expensive
+  - ordering should be
+  - f(x) || g(y)
+  - f(x) && g(y)
+
+### Use Short-Circuiting rules to your advantage
+
+When using logical disjunction (||), logical conjunction (&&), make sure to order your functions correctly for optimal gas usage. In logical disjunction (OR), if the first function resolves to true, the second one won’t be executed and hence save you gas. In logical disjunction (AND), if the first function evaluates to false, the next function won’t be evaluated. Therefore, you should order your functions accordingly in your solidity code to reduce the probability of needing to evaluate the second function.
+
+### Using unchecked
+
+Use unchecked for arithmetic where you are sure it won't over or underflow, saving gas costs for checks added from solidity v0.8.0.
+
 ## Other Optimizations
 
 - Remove the dead code
@@ -132,27 +152,9 @@ When a public function of a library is called, the bytecode of that function is 
 - ripemd160: 600 gas + 120 gas for each word of input data
 - So if you don't have any specific reasons to select another hash function, just use keccak256
 
-### Order
-
-- Order cheap functions before
-  - f(x) is cheap
-  - g(y) is expensive
-  - ordering should be
-  - f(x) || g(y)
-  - f(x) && g(y)
-
-### Use Short-Circuiting rules to your advantage
-
-When using logical disjunction (||), logical conjunction (&&), make sure to order your functions correctly for optimal gas usage. In logical disjunction (OR), if the first function resolves to true, the second one won’t be executed and hence save you gas. In logical disjunction (AND), if the first function evaluates to false, the next function won’t be evaluated. Therefore, you should order your functions accordingly in your solidity code to reduce the probability of needing to evaluate the second function.
-
 ### Use ERC1167 To Deploy the same Contract many times
 
 EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a bunch of contract clones from a factory.EIP1167 not only minimizes length, but it is also literally a “minimal” proxy that does nothing but proxying. It minimizes trust. Unlike other upgradable proxy contracts that rely on the honesty of their administrator (who can change the implementation), the address in EIP1167 is hardcoded in bytecode and remain unchangeable
-
-### Using unchecked
-
-Use unchecked for arithmetic where you are sure it won't over or underflow, saving gas costs for checks added from solidity v0.8.0.
-
 
 ## Merkle proof
 
