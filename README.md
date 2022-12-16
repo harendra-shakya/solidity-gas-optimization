@@ -42,6 +42,8 @@
 - Use bytes32 whenever possible, because it is the most optimized storage type.
 - If the length of bytes can be limited, use the lowest amount possible from bytes1 to bytes32.
 - Using bytes32 is cheaper than using string
+- Variable packing only occurs in storage — memory and call data does not get packed. 
+- You will not save space trying to pack function arguments or local variables
 
 #### Doubt -
 
