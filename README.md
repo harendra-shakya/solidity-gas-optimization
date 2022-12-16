@@ -72,7 +72,6 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 - it is good to use global variables with private visibility as it saves gas
 - Use events rather than storing data
 - Use memory arrays efficiently
-- it's good to use memory arrays if the size of the array is known, fixed-size memory arrays can be used to save gas.
 - Use return values efficiently
 - A simple optimization in Solidity consists of naming the return value of a function. It is not needed to create a local variable then.
 
@@ -84,6 +83,7 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 ### Fixed vs Dynamic
 
 - Fixed size variables are always cheaper than dynamic ones.
+- It's good to use memory arrays if the size of the array is known, fixed-size memory arrays can be used to save gas.
 - If we know how long an array should be, we specify a fixed size
 - This same rule applies to strings. A string or bytes variable is dynamically sized; we should use a byte32 if our string is short enough to fit.
 - If we absolutely need a dynamic array, it is best to structure our functions to be additive instead of subractive. Extending an array costs constant gas whereas truncating an array costs linear gas.
