@@ -35,11 +35,9 @@
 - Variable packing only occurs in storage — memory and call data does not get packed. 
 - You will not save space trying to pack function arguments or local variables
 
-#### Doubt -
-
-Q. So modifying a uint8 is cheaper than uint256?
-
-Ans. No, storing a small number in a uint8 variable is not cheaper than storing it in uint256 coz the number in uint8 is padded with numbers to fill 32 bytes.
+<aside>
+💡 Storing a small number in a uint8 variable is not cheaper than storing it in uint256 coz the number in uint8 is padded with numbers to fill 32 bytes.
+</aside>
 
 ### Inheritance
 
