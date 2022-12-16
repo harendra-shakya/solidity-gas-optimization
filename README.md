@@ -80,7 +80,10 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 
 - Use mapping whenever possible, it's cheap instead of the array
 - But an array could be a good choice if you have a small array
-- Fixed size variables are always cheaper than dynamic ones.
+ 
+### Fixed vs Dynamic
+
+-Fixed size variables are always cheaper than dynamic ones.
 - If we know how long an array should be, we specify a fixed size
 - This same rule applies to strings. A string or bytes variable is dynamically sized; we should use a byte32 if our string is short enough to fit.
 - If we absolutely need a dynamic array, it is best to structure our functions to be additive instead of subractive. Extending an array costs constant gas whereas truncating an array costs linear gas.
