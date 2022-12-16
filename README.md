@@ -132,6 +132,11 @@ When a public function of a library is called, the bytecode of that function is 
   - f(x) || g(y)
   - f(x) && g(y)
 
+### Use Short-Circuiting rules to your advantage
+
+When using logical disjunction (||), logical conjunction (&&), make sure to order your functions correctly for optimal gas usage. In logical disjunction (OR), if the first function resolves to true, the second one won’t be executed and hence save you gas. In logical disjunction (AND), if the first function evaluates to false, the next function won’t be evaluated. Therefore, you should order your functions accordingly in your solidity code to reduce the probability of needing to evaluate the second function.
+
+
 ## Merkle proof
 
 - A Merkle tree can be used to prove the validity of a large amount of data using a small amount of data.
@@ -141,6 +146,7 @@ When a public function of a library is called, the bytecode of that function is 
 - Remix
 - Truffle
 - Eth Gas reporter
+
 
 ## Some more resources
 
