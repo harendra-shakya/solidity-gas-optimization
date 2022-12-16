@@ -1,16 +1,5 @@
 # EVM Gas optimization tricks
 
-## Optimization process
-
-### Security is #1 concern !!!
-
-1. Make the code correct
-2. Prove code correctness with unit tests
-3. Measure the performance
-4. Pick the change that will have the most impact
-5. Make the code changes
-6. Go to 1
-
 ## Main Gas optimization areas in solidity
 
 - [Storage](#storage)
