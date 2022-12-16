@@ -149,6 +149,10 @@ When using logical disjunction (||), logical conjunction (&&), make sure to orde
 
 EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a bunch of contract clones from a factory.EIP1167 not only minimizes length, but it is also literally a “minimal” proxy that does nothing but proxying. It minimizes trust. Unlike other upgradable proxy contracts that rely on the honesty of their administrator (who can change the implementation), the address in EIP1167 is hardcoded in bytecode and remain unchangeable
 
+### Using unchecked
+
+Use unchecked for arithmetic where you are sure it won't over or underflow, saving gas costs for checks added from solidity v0.8.0.
+
 
 ## Merkle proof
 
