@@ -61,7 +61,7 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 
 - the cost of memory is complicated. you "buy" it in chunks, the cost of which will go up quadratically after a while
 
-- Try adjusting the location of your variables by playing with the keywords "storage" and "memory". Depending on the size and number of copying operations between Storage and memory, switching to memory may or may not give improvements. All this is coz of varying memory costs. So optimizing here is not that obvious and ebery case has to be considerd individually.
+- Try adjusting the location of your variables by playing with the keywords "storage" and "memory". Depending on the size and number of copying operations between Storage and memory, switching to memory may or may not give improvements. All this is coz of varying memory costs. So optimizing here is not that obvious and every case has to be considerd individually.
 
 ## Variables
 
