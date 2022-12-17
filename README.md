@@ -1,22 +1,12 @@
 # EVM Gas optimization tricks
 
-## Optimization process
-
-### Security is #1 concern !!!
-
-1. Make the code correct
-2. Prove code correctness with unit tests
-3. Measure the performance
-4. Pick the change that will have the most impact
-5. Make the code changes
-6. Go to 1
-
 ## Main Gas optimization areas in solidity
 
 - [Storage](#storage)
 - [Variables](#variables)
 - [Functions](#functions)
 - [Loops](#loops)
+- [Operations](#operations)
 
 ## Storage
 
@@ -42,12 +32,10 @@
 - Use bytes32 whenever possible, because it is the most optimized storage type.
 - If the length of bytes can be limited, use the lowest amount possible from bytes1 to bytes32.
 - Using bytes32 is cheaper than using string
+- Variable packing only occurs in storage — memory and call data does not get packed. 
+- You will not save space trying to pack function arguments or local variables
+- Storing a small number in a uint8 variable is not cheaper than storing it in uint256 coz the number in uint8 is padded with numbers to fill 32 bytes.
 
-#### Doubt -
-
-Q. So modifying a uint8 is cheaper than uint256?
-
-Ans. No, storing a small number in a uint8 variable is not cheaper than storing it in uint256 coz the number in uint8 is padded with numbers to fill 32 bytes.
 
 ### Inheritance
 
@@ -70,7 +58,6 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 - it is good to use global variables with private visibility as it saves gas
 - Use events rather than storing data
 - Use memory arrays efficiently
-- it's good to use memory arrays if the size of the array is known, fixed-size memory arrays can be used to save gas.
 - Use return values efficiently
 - A simple optimization in Solidity consists of naming the return value of a function. It is not needed to create a local variable then.
 
@@ -78,6 +65,14 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 
 - Use mapping whenever possible, it's cheap instead of the array
 - But an array could be a good choice if you have a small array
+ 
+### Fixed vs Dynamic
+
+- Fixed size variables are always cheaper than dynamic ones.
+- It's good to use memory arrays if the size of the array is known, fixed-size memory arrays can be used to save gas.
+- If we know how long an array should be, we specify a fixed size
+- This same rule applies to strings. A string or bytes variable is dynamically sized; we should use a byte32 if our string is short enough to fit.
+- If we absolutely need a dynamic array, it is best to structure our functions to be additive instead of subractive. Extending an array costs constant gas whereas truncating an array costs linear gas.
 
 ## Functions
 
@@ -99,6 +94,25 @@ Ans. No, storing a small number in a uint8 variable is not cheaper than storing 
 - try to avoid unbounded loops
 - write uint256 index; instead of writing uint256 index = 0; as being a uint256, it will be 0 by default so you can save some gas by avoiding initialization.
 - if you put `++` before `i` it costs less gas
+
+## Operations
+
+### Order
+
+- Order cheap functions before
+  - f(x) is cheap
+  - g(y) is expensive
+  - ordering should be
+  - f(x) || g(y)
+  - f(x) && g(y)
+
+### Use Short-Circuiting rules to your advantage
+
+When using logical disjunction (||), logical conjunction (&&), make sure to order your functions correctly for optimal gas usage. In logical disjunction (OR), if the first function resolves to true, the second one won’t be executed and hence save you gas. In logical disjunction (AND), if the first function evaluates to false, the next function won’t be evaluated. Therefore, you should order your functions accordingly in your solidity code to reduce the probability of needing to evaluate the second function.
+
+### Using unchecked
+
+Use unchecked for arithmetic where you are sure it won't over or underflow, saving gas costs for checks added from solidity v0.8.0.
 
 ## Other Optimizations
 
@@ -123,23 +137,9 @@ When a public function of a library is called, the bytecode of that function is 
 - ripemd160: 600 gas + 120 gas for each word of input data
 - So if you don't have any specific reasons to select another hash function, just use keccak256
 
-### Order
-
-- Order cheap functions before
-  - f(x) is cheap
-  - g(y) is expensive
-  - ordering should be
-  - f(x) || g(y)
-  - f(x) && g(y)
-
-### Use Short-Circuiting rules to your advantage
-
-When using logical disjunction (||), logical conjunction (&&), make sure to order your functions correctly for optimal gas usage. In logical disjunction (OR), if the first function resolves to true, the second one won’t be executed and hence save you gas. In logical disjunction (AND), if the first function evaluates to false, the next function won’t be evaluated. Therefore, you should order your functions accordingly in your solidity code to reduce the probability of needing to evaluate the second function.
-
 ### Use ERC1167 To Deploy the same Contract many times
 
 EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a bunch of contract clones from a factory.EIP1167 not only minimizes length, but it is also literally a “minimal” proxy that does nothing but proxying. It minimizes trust. Unlike other upgradable proxy contracts that rely on the honesty of their administrator (who can change the implementation), the address in EIP1167 is hardcoded in bytecode and remain unchangeable
-
 
 ## Merkle proof
 
@@ -151,21 +151,14 @@ EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a 
 - Truffle
 - Eth Gas reporter
 
-
-## Some more resources
-
-[Check Gas used by EVM Opcodes](https://github.com/crytic/evm-opcodes)
-
-[Awesome Solidity Gas Optimization](https://github.com/harendra-shakya/awesome-solidity-gas-optimization)
-
-[Yul (and Some Solidity) Optimizations and Tricks](https://hackmd.io/@gn56kcRBQc6mOi7LCgbv1g/rJez8O8st)
-
-[Gas Puzzel](https://github.com/RareSkills/gas-puzzles)
-
 #
 
-I will teach you everything that I am learning and I will keep updating this repo if I find something new so you can start or fork this repo if you want. 
+We will teach you everything that we are learning and we will keep updating this repo if we find something new so you can start or fork this repo if you want. 
 
-If you have any doubts or find any mistakes, please feel free to reach out to me and I’d try to reply AFAP. Consider me as a friend and [Contact Me](https://linktr.ee/harendra_shakya).
+If you have any doubts or find any mistakes, please feel free to reach out to us and we'll try to reply AFAP. Consider us as a friend and [Contact Me](https://linktr.ee/harendra_shakya). or [Axat](https://linktr.ee/axatbhardwaj)
 
 You can also make PR if you wanna update something.
+
+Happy Learning :) !!
+
+
