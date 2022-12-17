@@ -150,3 +150,15 @@ EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a 
 - Remix
 - Truffle
 - Eth Gas reporter
+
+#
+
+We will teach you everything that we are learning and we will keep updating this repo if we find something new so you can start or fork this repo if you want. 
+
+If you have any doubts or find any mistakes, please feel free to reach out to us and we'll try to reply AFAP. Consider us as a friend and [Contact Me](https://linktr.ee/harendra_shakya). or [Axat](https://linktr.ee/axatbhardwaj)
+
+You can also make PR if you wanna update something.
+
+Happy Learning :) !!
+
+
