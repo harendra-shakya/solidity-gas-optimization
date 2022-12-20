@@ -145,6 +145,16 @@ EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a 
 
 - A Merkle tree can be used to prove the validity of a large amount of data using a small amount of data.
 
+## Some more resources
+
+[Check Gas used by EVM Opcodes](https://github.com/crytic/evm-opcodes)
+
+[Awesome Solidity Gas Optimization](https://github.com/harendra-shakya/awesome-solidity-gas-optimization)
+
+[Yul (and Some Solidity) Optimizations and Tricks](https://hackmd.io/@gn56kcRBQc6mOi7LCgbv1g/rJez8O8st)
+
+[Gas Puzzel](https://github.com/RareSkills/gas-puzzles)
+
 ## Tools for estimating gas
 
 - Remix
