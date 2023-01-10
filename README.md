@@ -28,6 +28,7 @@ Feel free to submit a pull request, with anything from small fixes to docs or to
 - organize & try to pack two or more storage variables into one it's much cheaper
 - also while using structs, try to pack them
 - Don’t initialize Zero Values - when writing a for loop instead of writing `uint256 index = 0`; instead write `uint256 index;` as being a uin256 it will be 0 by default so you can save some gas by avoiding initialization
+- make solidity values constant where possible
 
 ### Refunds
 
@@ -88,6 +89,11 @@ Feel free to submit a pull request, with anything from small fixes to docs or to
   - Put often-called functions earlier
 - reduce the parameters if possible (Bigger input data increases gas because more things will be stored in memory)
 - payable function saves some gas as compared to non-payable functions (as the compiler won't have to check)
+- Solidity Modifiers Increase Code Size, So sometimes make them functions
+
+### Fallback Function
+
+- Fallback Function Calls are cheaper than regular function calls - The Fallback function (and Sig-less functions in Yul) save gas because they don’t require a function signature to call, for an example implementation I recommend looking at @libevm’s [subway](https://github.com/libevm/subway/blob/master/contracts/src/Sandwich.yulp) which utilize’s a sig-less function
 
 ### View Functions
 
@@ -125,6 +131,7 @@ Use unchecked for arithmetic where you are sure it won't over or underflow, savi
 - Remove the dead code
 - Use different solidity versions and try
 - EXTCODESIZE is quite expensive, this is used for calls between contracts, the only option we see to optimize the code in this regard is minimizing the number of calls to other contracts and libraries.
+- If you are testing in Production, use Self-Destruct and Factory patterns for an Upgradeable contract - Using a technique explained in this [Twitter thread](https://twitter.com/libevm/status/1468390867996086275?s=21) you can make it easily upgradeable and testable contracts with re-init and self-destruct. This mostly applied to MEV but if you are doing some cool factory-based programming it’s worth trying out.
 
 ### Libraries
 
@@ -186,20 +193,6 @@ EIP1167 minimal proxy contract is a standardized, gas-efficient way to deploy a 
 - Half of the Zero Address Checks in the NFT spec aren’t necessary - Launching a new NFT collection and looking to cut minting and usage costs? Use Solmate’s NFT contracts, as the standard needlessly prevents transfers to the void, unless someone can call a contract from the 0 address, and the 0 address has unique permissions, you don’t need to check that the caller isn’t the 0 address 90% of the time.
 
 - If it can’t overflow without uint256(-1) calls, you don’t need to check for overflow - Save gas and avoid safemath with unchecked {} , this one is Solidity only but I wanted to include it, I was tired of seeing counters using Safemath, it is cost-prohibitive enough to call a contract billions of times to prevent an attack.
-
-- If you are testing in Production, use Self-Destruct and Factory patterns for an Upgradeable contract - Using a technique explained in this [Twitter thread](https://twitter.com/libevm/status/1468390867996086275?s=21) you can make it easily upgradeable and testable contracts with re-init and self-destruct. This mostly applied to MEV but if you are doing some cool factory-based programming it’s worth trying out.
-
-- Fallback Function Calls are cheaper than regular function calls - The Fallback function (and Sig-less functions in Yul) save gas because they don’t require a function signature to call, for an example implementation I recommend looking at @libevm’s [subway](https://github.com/libevm/subway/blob/master/contracts/src/Sandwich.yulp) which utilize’s a sig-less function
-
-- Pack Structs in Solidity - A basic optimization but important to know, structs should be organized so that they sequentially add up to multiples of 256 bits in size. So uint112 uint112 uint256 vs uint112 uint256 uint112
-
-  Saves read operations needed to get a value
-
-  [Struct packing article here](https://dev.to/javier123454321/solidity-gas-optimizations-pt-3-packing-structs-23f4)
-
-- Making Solidity Values Constant Where Possible - They are replaced with literals at compile time and will prevent you from having to a read a value from memory or storage. For writing Yul - replace all known values and constant values with literals to save gas and comment what they are.
-
-- Solidity Modifiers Increase Code Size, So sometimes make them functions - When using modifiers, the code of the modifiers is inserted at the start of the function at compile time, which can massively ballon code size. So sometimes it makes sense to make a modifier a function call instead, as only the function call will be inserted at the start of the function.
 
 - Trustless calls from L2 to L2 exist, and can be very useful for L2 based DAO’s - The OVM and ArbOS have built-in functions on contract calls from L1 to L2 to verify msg.sender and vice versa. Therefore if you make an L1 contract that can only be called by a trusted party on one L2 before calling another L2, you can create a trustless bridge. Recommend reading about Hop for this, but a cool design choice for DAO building.
 
