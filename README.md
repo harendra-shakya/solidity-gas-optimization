@@ -42,7 +42,7 @@ Feel free to submit a pull request, with anything from small fixes to docs or to
 - Using bytes32 is cheaper than using string
 - Variable packing only occurs in storage — memory and call data does not get packed.
 - You will not save space trying to pack function arguments or local variables
-- Storing a small number in a uint8 variable is not cheaper than storing it in uint256 coz the number in uint8 is padded with numbers to fill 32 bytes.
+- Storing a single small number in a uint8 variable is not cheaper than storing it in uint256 coz the number in uint8 is allotted a full 32-byte storage slot equal to what is allotted to a uint256 storage variable. The real savings come when you have multiple small storage variables as they get packed into a single 32-byte storage slot instead of being stored in separate 32-byte slots. The reduced no. of storage slots results in significant gas savings.
 
 ### Inheritance
 
