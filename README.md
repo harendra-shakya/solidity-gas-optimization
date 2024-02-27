@@ -79,6 +79,17 @@ Feel free to submit a pull request, with anything from small fixes to docs or to
 - It's good to use memory arrays if the size of the array is known, fixed-size memory arrays can be used to save gas.
 - If we know how long an array should be, we specify a fixed size
 - This same rule applies to strings. A string or bytes variable is dynamically sized; we should use a byte32 if our string is short enough to fit.
+
+```solidity
+contract StringToBytes32 {
+    bytes32 public fixedSizeString;
+
+    function setFixedSizeData(string memory str) public {
+        require(bytes(str).length <= 32, "String exceeds 32 bytes.");
+        fixedSizeString = bytes32(bytes(str));
+    }
+}
+```
 - If we absolutely need a dynamic array, it is best to structure our functions to be additive instead of subractive. Extending an array costs constant gas whereas truncating an array costs linear gas.
 
 ## Functions
