@@ -83,7 +83,7 @@ Feel free to submit a pull request, with anything from small fixes to docs or to
 
 ## Functions
 
-- use external most of the time whenever possible
+- use external most of the time whenever possible. This is because external functions receive parameters as `calldata` which does not get copied to `memory`, hence is more gas efficient. This is especially impactful when sending dynamic string/array values to these functions.
 - Each position will have an extra 22 gas, so
   - Reduce public varibles
   - Put often-called functions earlier
